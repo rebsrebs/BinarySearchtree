@@ -1,8 +1,6 @@
-// You’ll build a balanced BST in this assignment. Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.
 
 // NODE FACTORY FUNCTION
 const nodeFactory = (data) => {
-  data = data;
   let left;
   let right;
   return { data, left, right };
@@ -12,43 +10,33 @@ const nodeFactory = (data) => {
 class Tree {
   constructor(array) {
     this.array = array;
-    this.root = buildTree(array);
+    this.root = null;
   }
 
   // Methods
-  // addNode(object) {
-  // }
 }
 
 // BUILD TREE FUNCTION
-const buildTree = function(array, start = 0, end = array.length-1) {
-
-  const MyTree = new Tree(array);
-
-  // Find middle of array
-  let mid = Math.floor(((start + end)/2));
-
-  if (start > end) {
+const buildTree = function(array) {
+  // start is index of first item, end is index of last item
+  let start = 0;
+  let end = array.length-1;
+  // Base case - if array is only 1 element long
+  if (start >= end) {
     return null;
   } else {
-    // set value of node to the middle of array, this is the root of tree
-    const newNode = nodeFactory(array[mid]);
-    let leftArray = slice.array[start, mid];
-    let rightArray = slice.array[mid];
-    newNode.left = buildTree(leftArray);
-    newNode.right = buildTree(rightArray); 
-    // MyTree.addNode(newNode);   
+    // Find index of middle of array
+    let mid = Math.floor(((start + end)/2));
+    console.log(`Mid is ${mid}`);
+    const MyTree = new Tree(array);
+    MyTree.root = buildTree(array);
+    // create node with data from the mid index of array
+    const root = nodeFactory(array[mid]);
+    let leftArray = array.slice(start, mid);
+    let rightArray = array.slice(mid+1);
+    console.log(`leftArray is ${leftArray} and rightArray is ${rightArray}`);
+    root.left = buildTree(leftArray);
+    root.right = buildTree(rightArray); 
+    return root;
   }
 }
-
-
-
-
-  //Algorithm steps:
-// - initialize start = 0, end = length of the array -1
-// - mid = (start+end)/2
-// - create a tree node wiht mid as root (lets call it A)
-// - recursively do the following steps:
-// - find mid of left subarray and make it root of left subtree of A
-// - find mid of right subarray and make it root of right subtree of A
-
