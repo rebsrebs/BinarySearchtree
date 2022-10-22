@@ -13,6 +13,19 @@ class Tree {
     this.root = null;
   }
 
+  // methods
+  insertNode() {
+    // if key is smaller than the root
+      // if key has no left, key = root.left
+      // else
+      // run insertNode on key.left
+    // else if key is larger than the root
+      // if key has no right, key = root.right
+      // else
+      // run insertNode on key.right
+    // else return;
+  }
+
 }
 
 // BUILD TREE FUNCTION
