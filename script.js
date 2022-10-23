@@ -18,18 +18,19 @@ const Tree = class {
     console.log(`data is ${data} and root is ${this.root.data}`);
     if (data < this.root.data) {
       console.log(`Data ${data} is smaller than this.root ${this.root}`);
-      if (this.root.left.data===null) {
-        this.root.left = data;
+      if (this.root.left===null) {
+        this.root.left.data = data;
         return this.root;
       } else {
       this.root.left(insertNode(data)) 
       }
-    } else if (data > this.root) {
-      console.log(`Data ${data} is greater than this.root ${this.root}`);
+    } else if (data > this.root.data) {
+      console.log(`Data ${data} is greater than this.root ${this.root.data}`);
       if (this.root.right===null) {
-        this.root.right = data;
+        this.root.right.data = data;
         return this.root;
       } else {
+        // something not right here
       this.root.right(insertNode(data)) 
       }
     } else {
