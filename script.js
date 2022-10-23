@@ -15,8 +15,10 @@ const Tree = class {
 
   //methods
   insertNode(data) {
-    if (data < this.root) {
-      if (this.root.left===null) {
+    console.log(`data is ${data} and root is ${this.root.data}`);
+    if (data < this.root.data) {
+      console.log(`Data ${data} is smaller than this.root ${this.root}`);
+      if (this.root.left.data===null) {
         this.root.left = data;
         return this.root;
       } else {
@@ -68,8 +70,6 @@ const buildTree = function(array) {
 
     prettyPrint(root);
 
-    // const MyTree = new Tree(array);
-    // return MyTree.root = root;
     return root;
   }
 }
@@ -85,6 +85,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 }
-
 
 const TheTree = new Tree([1,2,3,4,5,7,8]);
