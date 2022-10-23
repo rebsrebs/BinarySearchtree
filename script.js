@@ -7,26 +7,48 @@ const nodeFactory = (data) => {
 };
 
 // TREE CLASS
-class Tree {
+const Tree = class {
   constructor(array) {
     this.array = array;
-    this.root = null;
+    this.root = buildTree(array);
   }
 
-  // methods
-  insertNode() {
-    // if key is smaller than the root
-      // if key has no left, key = root.left
-      // else
-      // run insertNode on key.left
-    // else if key is larger than the root
-      // if key has no right, key = root.right
-      // else
-      // run insertNode on key.right
-    // else return;
+  //methods
+  insertNode(data) {
+    if (data < this.root) {
+      if (this.root.left===null) {
+        this.root.left = data;
+        return this.root;
+      } else {
+      this.root.left(insertNode(data)) 
+      }
+    } else if (data > this.root) {
+      console.log(`Data ${data} is greater than this.root ${this.root}`);
+      if (this.root.right===null) {
+        this.root.right = data;
+        return this.root;
+      } else {
+      this.root.right(insertNode(data)) 
+      }
+    } else {
+      console.log('no change made');
+      return this.root;
+    }
   }
 
+  // deleteNode() {
+    // if node is a leaf
+      // the node that previously pointed to that node will no longer do that
+    // else if node has one child, replace it with its child so node that previously pointed to it will point to its child
+    // else if node has two children
+      // find the next biggest thing
+      // look in its right sub tree for the left most thing that has no left - it's the smallest thing in its subtree
+      // replace node with that node - recursively if something also had children??
+
+  // }
 }
+
+  
 
 // BUILD TREE FUNCTION
 const buildTree = function(array) {
@@ -46,8 +68,9 @@ const buildTree = function(array) {
 
     prettyPrint(root);
 
-    const MyTree = new Tree(array);
-    return MyTree.root = root;
+    // const MyTree = new Tree(array);
+    // return MyTree.root = root;
+    return root;
   }
 }
 
@@ -64,44 +87,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const buildTree = function(array) {
-//   console.log('Build tree has started!');
-//   // start is index of first item, end is index of last item
-//   let start = 0;
-//   let end = array.length-1;
-//   // Base case - if array is only 1 element long
-//   if (start > end) {
-//     return null;
-//   } else {
-//     // Find index of middle of array
-//     let mid = Math.floor(((start + end)/2));
-//     console.log(`Mid is index ${mid} with value ${array[mid]}`);
-//     // create node with data from the mid index of array
-//     const root = nodeFactory(array[mid]);
-//     let leftArray = array.slice(start, mid);
-//     let rightArray = array.slice(mid+1);
-//     console.log(`leftArray is ${leftArray} and rightArray is ${rightArray}`);
-
-//     root.left = buildTree(leftArray);
-//     root.right = buildTree(rightArray); 
-
-//      // How do I just print the main tree and not the subtrees?
-//      prettyPrint(root);
-
-//     const MyTree = new Tree(array);
-//     return MyTree.root = root;
-//   }
-// }
+const TheTree = new Tree([1,2,3,4,5,7,8]);
