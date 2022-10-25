@@ -52,7 +52,47 @@ const Tree = class {
     // Not sure what this is doing but if I remove it it's wrong
     return currentNode;
   }
+
+  // Start deleteNode
+  deleteNode(data, currentNode = this.root) {
+    console.log(`deleteNode is running and the currentNode.data is ${currentNode.data}.`)
+
+    // it tree is empty
+    if (currentNode === null) {
+      return 'Tree is empty. Nothing to delete.';
+    }
+  
+    // If you find the node
+    if (data === currentNode.data) {
+      console.log('Found it.');
+    }
+
+    // If data is smaller than current node data
+    if (data < currentNode.data) {
+      console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
+      // If currentNode has a left
+      if (currentNode.left) {
+        currentNode = currentNode.left;
+        this.deleteNode(data, currentNode);
+      }
+    }
+    // If data is larger than current node data
+    if (data > currentNode.data) {
+      console.log(`data ${data} is bigger than currentNode.data ${currentNode.data}`);
+      // If currentNode has a right
+      if (currentNode.right) {
+        currentNode = currentNode.right;
+        this.deleteNode(data, currentNode);
+      }
+    }
+    return currentNode;
+
+  }
+  // End deleteNode
+
 }
+
+
 
 
 
