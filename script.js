@@ -11,20 +11,21 @@ const Tree = class {
 
   constructor(array) {
     this.array = array;
-    this.root = this.buildTree(array);
+    this.sortedArray = array.sort();
+    this.root = this.buildTree(this.sortedArray);
   }
 
 // Methods
-  buildTree(array) {
+  buildTree(sortedArray) {
     let start = 0;
-    let end = array.length-1;
+    let end = sortedArray.length-1;
     if (start > end) {
       return null;
     } else {
       let mid = Math.floor(((start + end)/2));
-      const root = nodeFactory(array[mid]);
-      let leftArray = array.slice(start, mid);
-      let rightArray = array.slice(mid+1);
+      const root = nodeFactory(sortedArray[mid]);
+      let leftArray = sortedArray.slice(start, mid);
+      let rightArray = sortedArray.slice(mid+1);
       root.left = this.buildTree(leftArray);
       root.right = this.buildTree(rightArray); 
       return root;
@@ -32,24 +33,30 @@ const Tree = class {
   }
 
   insertNode(data, currentNode = this.root) {
-    // base case
+    // if tree is empty
     if (currentNode === null) {
+      // create a node
       return currentNode = nodeFactory(data);
     }
+    // if data is the same as current node
     if (data === currentNode.data) {
+      // do nothing
       return;
     }
+
     if (data < currentNode.data) {
       currentNode.left = this.insertNode(data, currentNode.left);
     } else if (data > currentNode.data) {
       currentNode.right = this.insertNode(data, currentNode.right);
     }
-
+    // Not sure what this is doing but if I remove it it's wrong
     return currentNode;
   }
 }
 
-const TheTree = new Tree([1,3,5,7,9]);
+
+
+const TheTree = new Tree([3,5,7,9,1]);
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   // console.log(`prettyPrint argument node.data is ${node.data}`)
