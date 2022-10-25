@@ -34,7 +34,7 @@ const Tree = class {
   insertNode(data, currentNode = this.root) {
     // base case
     if (currentNode === null) {
-      currentNode = nodeFactory(data);
+      return currentNode = nodeFactory(data);
     }
     if (data === currentNode.data) {
       return;
@@ -45,85 +45,8 @@ const Tree = class {
       currentNode.right = this.insertNode(data, currentNode.right);
     }
 
-    console.log(currentNode);
     return currentNode;
   }
-
-
-  // insertNode(data, current = this.root) {
-  //   console.log(`data is ${data} and current is ${current} and current.data is ${current.data}`)
-  //   if (data < current.data) {
-  //     console.log(`data ${data} is smaller than current.data ${current.data}`);
-  //     if (current.left===null) {
-  //       console.log(`current.leff is null so we will create a new node`)
-  //       // create node
-  //       const newNode = nodeFactory(data);
-  //       newNode.left = null;
-  //       newNode.right = null;
-  //       // point current leaf node to it
-  //       current.left = newNode;
-  //       return;
-  //     } else {
-  //     console.log(`current.left.data is ${current.left.data}`);
-  //     current = current.left;
-  //     // this does not work:
-  //     current.insertNode(data, current);
-  //     }
-  //   } else if (data > this.root.data) {
-  //     // if this is a leaf node
-  //     if (current.right===null) {
-  //       // create node
-  //       const newNode = nodeFactory(data);
-  //       newNode.left = null;
-  //       newNode.right = null;
-  //       // point current leaf node to it
-  //       current.right = newNode;
-  //       return;
-  //     } else {
-  //       current = current.right;
-  //       current.insertNode(data, current);
-  //     }
-  //   } else {
-  //     console.log('no change made');
-  //     return current;
-  //   }
-  // }
-
-
-  // alternate version after watching video
-  // addData(data) {
-  //   if (this.root === null) {
-  //     this.root = nodeFactory(data);
-
-  //   } else {
-  //     const insertNode = function(data, current = this.root){
-
-  //       if (data < current.data) {
-
-  //         if (current.left === null) {
-  //           return current.left = nodeFactory(data);
-  //         } else {
-  //           current = current.left;
-  //           return current.insertNode(data, current);
-  //         }
-
-  //       } else if (data > current.data) {
-  //         if (current.right === null) {
-  //           return current.right = nodeFactory(data);
-  //         } else {
-  //           current = current.right;
-  //           return current.insertNode(data, current);
-  //         }
-  //       }
-
-  //     }
-  //     insertNode(data);
-  //   }
-  // }
-
-
-
-
 }
 
 
