@@ -90,6 +90,57 @@ const Tree = class {
   }
   // End deleteNode
 
+
+
+
+  // Start findNode
+  // Works except on leaf nodes
+  findNode(data, currentNode = this.root) {
+    console.log(`findNode is running and the currentNode.data is ${currentNode.data}.`)
+
+    // it tree is empty
+    if (currentNode === null) {
+      return 'Tree is empty. Nothing to delete.';
+    }
+  
+    // If you find the node
+    if (data === currentNode.data) {
+      console.log(`Found it. data is ${data} and currentNode.data is ${currentNode.data}`);
+    }
+
+    // If data is smaller than current node data
+    if (data < currentNode.data) {
+      console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
+      // If currentNode has a left
+      if (currentNode.left) {
+        currentNode = currentNode.left;
+        this.findNode(data, currentNode);
+      } else {
+        `currentNode ${currentNode} does not have a left, data not found. `
+        return currentNode;
+      }
+    }
+    // If data is larger than current node data
+    if (data > currentNode.data) {
+      console.log(`data ${data} is bigger than currentNode.data ${currentNode.data}`);
+      // If currentNode has a right
+      if (currentNode.right) {
+        currentNode = currentNode.right;
+        this.findNode(data, currentNode);
+      } else {
+        return `currentNode ${currentNode} does not have a right, data not found. `
+      }
+    }
+    
+    if (currentNode.left && currentNode.right) {
+      return currentNode;
+    } else {
+      'This is a leaf node and I cannot figure out how to return it yet'
+    }
+
+  }
+  // End findNode
+
 }
 
 
