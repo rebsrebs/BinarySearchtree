@@ -104,17 +104,15 @@ const Tree = class {
 
   // Start findNode
   findNode(data, currentNode = this.root) {
-    console.log(`findNode is running and the currentNode.data is ${currentNode.data}.`);
     // If tree is empty
     if (currentNode.data === null) {
       return 'Tree is empty. Nothing to find.';
     }
     // If data is smaller than current node data
     if (data < currentNode.data) {
-    console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
       // If currentNode has a left
       if (currentNode.left) {
-        this.findNode(data, currentNode.left);
+        return this.findNode(data, currentNode.left);
       } else {
         return `currentNode ${currentNode} does not have a left, data not found in this tree. `
       }
@@ -123,14 +121,13 @@ const Tree = class {
       console.log(`data ${data} is bigger than currentNode.data ${currentNode.data}`);
       // If currentNode has a right
       if (currentNode.right) {
-        this.findNode(data, currentNode.right);
+        return this.findNode(data, currentNode.right);
       } else {
         return `currentNode ${currentNode} does not have a right, data not found in this tree. `
       }
     // BASE CASE If you find the node:
     } else if (data === currentNode.data) {
-        console.log(`Found it. data is ${data} and currentNode.data is ${currentNode.data}`);
-        return currentNode; // why is this not happening?
+        return currentNode; 
     } else {
       return 'Not sure what happened.';
     }
