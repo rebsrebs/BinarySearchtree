@@ -6,13 +6,18 @@ const nodeFactory = (data) => {
   return { data, left, right };
 };
 
+function compareNumbers(a, b) {
+  return a - b;
+}
+
 // TREE CLASS
 const Tree = class {
 
   constructor(array) {
     this.array = array;
-    this.sortedArray = array.sort();
+    this.sortedArray = array.sort(compareNumbers);
     this.root = this.buildTree(this.sortedArray);
+    // this.root = this.buildTree(array);
   }
 
 // Methods
@@ -65,6 +70,10 @@ const Tree = class {
     // If you find the node
     if (data === currentNode.data) {
       console.log('Found it.');
+      // If the node is a leaf
+      if (!currentNode.left && !currentNode.right) {
+        console.log('The node is a leaf, we must simply delete it.')
+      }
     }
 
     // If data is smaller than current node data
@@ -106,6 +115,7 @@ const Tree = class {
     // If you find the node
     if (data === currentNode.data) {
       console.log(`Found it. data is ${data} and currentNode.data is ${currentNode.data}`);
+      return currentNode;
     }
 
     // If data is smaller than current node data
@@ -114,6 +124,7 @@ const Tree = class {
       // If currentNode has a left
       if (currentNode.left) {
         currentNode = currentNode.left;
+        // RECURSION
         this.findNode(data, currentNode);
       } else {
         `currentNode ${currentNode} does not have a left, data not found. `
@@ -126,6 +137,7 @@ const Tree = class {
       // If currentNode has a right
       if (currentNode.right) {
         currentNode = currentNode.right;
+        // RECURSION
         this.findNode(data, currentNode);
       } else {
         return `currentNode ${currentNode} does not have a right, data not found. `
@@ -133,10 +145,15 @@ const Tree = class {
     }
     
     if (currentNode.left && currentNode.right) {
+      console.log('We are about to return the currentNode in the last if statement of the function because it has both left and right.')
       return currentNode;
     } else {
       'This is a leaf node and I cannot figure out how to return it yet'
     }
+    
+    console.log(`We are about to return the currentNode.data ${currentNode.data} at the very end of the function.`)
+    return currentNode;
+
 
   }
   // End findNode
@@ -147,7 +164,7 @@ const Tree = class {
 
 
 
-const TheTree = new Tree([3,5,7,9,1]);
+const TheTree = new Tree([3,5,7,9,11,14,22,25,27,29]);
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   // console.log(`prettyPrint argument node.data is ${node.data}`)
