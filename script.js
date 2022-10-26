@@ -46,7 +46,7 @@ const Tree = class {
     // if data is the same as current node
     if (data === currentNode.data) {
       // do nothing
-      return;
+      return 'Data already on tree.';
     }
 
     if (data < currentNode.data) {
@@ -103,61 +103,39 @@ const Tree = class {
 
 
   // Start findNode
-  // Works except on leaf nodes
   findNode(data, currentNode = this.root) {
-    console.log(`findNode is running and the currentNode.data is ${currentNode.data}.`)
-
-    // it tree is empty
-    if (currentNode === null) {
-      return 'Tree is empty. Nothing to delete.';
+    console.log(`findNode is running and the currentNode.data is ${currentNode.data}.`);
+    // If tree is empty
+    if (currentNode.data === null) {
+      return 'Tree is empty. Nothing to find.';
     }
-  
-    // If you find the node
-    if (data === currentNode.data) {
-      console.log(`Found it. data is ${data} and currentNode.data is ${currentNode.data}`);
-      return currentNode;
-    }
-
     // If data is smaller than current node data
     if (data < currentNode.data) {
-      console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
+    console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
       // If currentNode has a left
       if (currentNode.left) {
-        currentNode = currentNode.left;
-        // RECURSION
-        this.findNode(data, currentNode);
+        this.findNode(data, currentNode.left);
       } else {
-        `currentNode ${currentNode} does not have a left, data not found. `
-        return currentNode;
+        return `currentNode ${currentNode} does not have a left, data not found in this tree. `
       }
-    }
     // If data is larger than current node data
-    if (data > currentNode.data) {
+    } else if (data > currentNode.data) {
       console.log(`data ${data} is bigger than currentNode.data ${currentNode.data}`);
       // If currentNode has a right
       if (currentNode.right) {
-        currentNode = currentNode.right;
-        // RECURSION
-        this.findNode(data, currentNode);
+        this.findNode(data, currentNode.right);
       } else {
-        return `currentNode ${currentNode} does not have a right, data not found. `
+        return `currentNode ${currentNode} does not have a right, data not found in this tree. `
       }
-    }
-    
-    if (currentNode.left && currentNode.right) {
-      console.log('We are about to return the currentNode in the last if statement of the function because it has both left and right.')
-      return currentNode;
+    // BASE CASE If you find the node:
+    } else if (data === currentNode.data) {
+        console.log(`Found it. data is ${data} and currentNode.data is ${currentNode.data}`);
+        return currentNode; // why is this not happening?
     } else {
-      'This is a leaf node and I cannot figure out how to return it yet'
+      return 'Not sure what happened.';
     }
-    
-    console.log(`We are about to return the currentNode.data ${currentNode.data} at the very end of the function.`)
-    return currentNode;
-
-
   }
   // End findNode
-
 }
 
 
