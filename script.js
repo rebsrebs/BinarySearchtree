@@ -37,28 +37,33 @@ const Tree = class {
     }
   }
 
+  //START INSERTNODE
+  // put in the data you want to add, and the top of the tree
   insertNode(data, currentNode = this.root) {
-    // if tree is empty
+    
+    // node is empty
     if (currentNode === null) {
       // create a node
+      console.log(`Base case because currentNode is ${currentNode} which is null.`)
       return currentNode = nodeFactory(data);
-    }
+    } else
     // if data is the same as current node
     if (data === currentNode.data) {
       // do nothing
       return 'Data already on tree.';
-    }
-
+    } else
+    // if data is smaller than current node
     if (data < currentNode.data) {
       currentNode.left = this.insertNode(data, currentNode.left);
     } else if (data > currentNode.data) {
       currentNode.right = this.insertNode(data, currentNode.right);
-    }
+    } 
     // Not sure what this is doing but if I remove it it's wrong
     return currentNode;
   }
+  //END INSERTNODE
 
-  // Start deleteNode
+  //START DELETENODE
   deleteNode(data, currentNode = this.root) {
     console.log(`deleteNode is running and the currentNode.data is ${currentNode.data}.`)
 
@@ -97,12 +102,12 @@ const Tree = class {
     return currentNode;
 
   }
-  // End deleteNode
+  //END DELETENODE
 
 
 
 
-  // Start findNode
+  //START FINDNODE
   findNode(data, currentNode = this.root) {
     // If tree is empty
     if (currentNode.data === null) {
@@ -132,14 +137,14 @@ const Tree = class {
       return 'Not sure what happened.';
     }
   }
-  // End findNode
+  //END FINDNODE
 }
 
 
 
 
 
-const TheTree = new Tree([3,5,7,9,11,14,22,25,27,29]);
+const TheTree = new Tree([1,3,5,8,9,20]);
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   // console.log(`prettyPrint argument node.data is ${node.data}`)
