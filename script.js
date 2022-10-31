@@ -64,21 +64,47 @@ const Tree = class {
   //END INSERTNODE
 
   //START DELETENODE
-  deleteNode(data, currentNode = this.root) {
+  deleteNode(data, currentNode = this.root, parent = null) {
     console.log(`deleteNode is running and the currentNode.data is ${currentNode.data}.`)
 
     // it tree is empty
     if (currentNode === null) {
-      return 'Tree is empty. Nothing to delete.';
+      return 'Data not found.';
     }
   
     // If you find the node
     if (data === currentNode.data) {
       console.log('Found it.');
+
       // If the node is a leaf
       if (!currentNode.left && !currentNode.right) {
         console.log('The node is a leaf, we must simply delete it.')
+        // remove parent link to node
+        if (parent.right === currentNode) {
+          parent.right = null;
+        } else if (parent.left === currentNode) {
+          parent.left = null;
+        }
+        // if the node to delete has only a right child
+      } else if (currentNode.right && !currentNode.left){
+          if (currentNode.data < parent.data) {
+            parent.left = currentNode.right;
+          } else {
+            parent.right = currentNode.right;
+          }
+        // if the node has only a left child
+      } else if (currentNode.left && !currentNode.right){
+        if (currentNode.data > parent.data) {
+          parent.right = currentNode.left;
+        } else {
+          parent.left = currentNode.left;
+        }
+        // if the node has two children
+      } else if (currentNode.left && currentNode.right) {
+        console.log ('Node to be deleted has two children.')
+
       }
+      return 'node deleted.'
     }
 
     // If data is smaller than current node data
@@ -86,8 +112,9 @@ const Tree = class {
       console.log(`data ${data} is smaller than currentNode.data ${currentNode.data}`);
       // If currentNode has a left
       if (currentNode.left) {
+        parent = currentNode;
         currentNode = currentNode.left;
-        this.deleteNode(data, currentNode);
+        this.deleteNode(data, currentNode, parent);
       }
     }
     // If data is larger than current node data
@@ -95,8 +122,9 @@ const Tree = class {
       console.log(`data ${data} is bigger than currentNode.data ${currentNode.data}`);
       // If currentNode has a right
       if (currentNode.right) {
+        parent = currentNode;
         currentNode = currentNode.right;
-        this.deleteNode(data, currentNode);
+        this.deleteNode(data, currentNode, parent);
       }
     }
     return currentNode;
