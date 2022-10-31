@@ -40,36 +40,48 @@ const Tree = class {
   //START INSERTNODE
   // put in the data you want to add, and the top of the tree
   insertNode(data, currentNode = this.root) {
+    if (data && currentNode) {
+    console.log(`At beginning of insertNode, data in currentNode is ${currentNode.data} and data is ${data}`);
+    console.log(typeof data, typeof currentNode.data);
+    }
     
     // node is empty
     if (currentNode === null) {
       // create a node
-      console.log(`Base case because currentNode is ${currentNode} which is null.`)
-      return currentNode = nodeFactory(data);
-    } else
+      // console.log(`Base case because currentNode is ${currentNode} which is null.`)
+      currentNode = nodeFactory(data);
+      return currentNode;
+
     // if data is the same as current node
-    if (data === currentNode.data) {
-      // do nothing
+    } else if (data === currentNode.data) {
+      // do nothing - this is not happening
       return 'Data already on tree.';
-    } else
+
     // if data is smaller than current node
-    if (data < currentNode.data) {
+    } else if (data < currentNode.data) {
+      console.log(`data ${data} smaller than currentNode.data ${currentNode.data} so going to run recursively`);
       currentNode.left = this.insertNode(data, currentNode.left);
+
+    // if data is bigger than current node  
     } else if (data > currentNode.data) {
+      console.log(`data ${data} larger than currentNode.data ${currentNode.data} so going to run recursively`);
       currentNode.right = this.insertNode(data, currentNode.right);
     } 
+
     // Not sure what this is doing but if I remove it it's wrong
+    console.log(`about to return currentNode whose data is ${currentNode.data} at the very end of the function`)
     return currentNode;
   }
   //END INSERTNODE
 
   //START DELETENODE
+  // need to recognize if data is not in tree
   deleteNode(data, currentNode = this.root, parent = null) {
     console.log(`deleteNode is running and the currentNode.data is ${currentNode.data}.`)
 
     // it tree is empty
     if (currentNode === null) {
-      return 'Data not found.';
+      return 'Tree empty.';
     }
   
     // If you find the node
@@ -115,6 +127,8 @@ const Tree = class {
         parent = currentNode;
         currentNode = currentNode.left;
         this.deleteNode(data, currentNode, parent);
+      } else {
+        return 'Data not found.'
       }
     }
     // If data is larger than current node data
@@ -125,6 +139,8 @@ const Tree = class {
         parent = currentNode;
         currentNode = currentNode.right;
         this.deleteNode(data, currentNode, parent);
+      } else {
+        return 'Data not found.'
       }
     }
     return currentNode;
