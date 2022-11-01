@@ -150,7 +150,7 @@ const Tree = class {
       if (currentNode.left) {
         return this.findNode(data, currentNode.left);
       } else {
-        return `currentNode does not have a left, data not found in this tree. `
+        return `Data not found in this tree. `
       }
     // If data is larger than current node data
     } else if (data > currentNode.data) {
@@ -159,15 +159,13 @@ const Tree = class {
       if (currentNode.right) {
         return this.findNode(data, currentNode.right);
       } else {
-        return `currentNode does not have a right, data not found in this tree. `
+        return `Data not found in this tree. `
       }
     // BASE CASE If you find the node:
     } else if (data === currentNode.data) {
       console.log('found it!')
-        return currentNode; 
-    } else {
-      return 'Not sure what happened.';
     }
+    return currentNode;
   }
   //END FINDNODE
 }
