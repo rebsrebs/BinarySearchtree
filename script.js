@@ -40,36 +40,25 @@ const Tree = class {
   //START INSERTNODE
   // put in the data you want to add, and the top of the tree
   insertNode(data, currentNode = this.root) {
-    if (data && currentNode) {
-    console.log(`At beginning of insertNode, data in currentNode is ${currentNode.data} and data is ${data}`);
-    console.log(typeof data, typeof currentNode.data);
-    }
     
     // node is empty
     if (currentNode === null) {
-      // create a node
-      // console.log(`Base case because currentNode is ${currentNode} which is null.`)
       currentNode = nodeFactory(data);
       return currentNode;
 
     // if data is the same as current node
     } else if (data === currentNode.data) {
-      // do nothing - this is not happening
-      return 'Data already on tree.';
+      console.log('Data already on tree.');
 
     // if data is smaller than current node
     } else if (data < currentNode.data) {
-      console.log(`data ${data} smaller than currentNode.data ${currentNode.data} so going to run recursively`);
       currentNode.left = this.insertNode(data, currentNode.left);
 
     // if data is bigger than current node  
     } else if (data > currentNode.data) {
-      console.log(`data ${data} larger than currentNode.data ${currentNode.data} so going to run recursively`);
       currentNode.right = this.insertNode(data, currentNode.right);
     } 
 
-    // Not sure what this is doing but if I remove it it's wrong
-    console.log(`about to return currentNode whose data is ${currentNode.data} at the very end of the function`)
     return currentNode;
   }
   //END INSERTNODE
@@ -149,8 +138,6 @@ const Tree = class {
   //END DELETENODE
 
 
-
-
   //START FINDNODE
   findNode(data, currentNode = this.root) {
     // If tree is empty
@@ -184,10 +171,6 @@ const Tree = class {
   }
   //END FINDNODE
 }
-
-
-
-
 
 const TheTree = new Tree([1,3,5,8,9,20]);
 
