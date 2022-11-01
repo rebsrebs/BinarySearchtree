@@ -63,6 +63,11 @@ const Tree = class {
   }
   //END INSERTNODE
 
+
+
+
+
+
   //START DELETENODE
   // need to recognize if data is not in tree
   deleteNode(data, currentNode = this.root, parent = null) {
@@ -103,7 +108,19 @@ const Tree = class {
         // if the node has two children
       } else if (currentNode.left && currentNode.right) {
         console.log ('Node to be deleted has two children.')
-
+        //find a minimum value in the right subtree currentNode.right
+        let deleteThis = currentNode;
+        let subTree = currentNode.right;
+        while (subTree.left) {
+          subTree = subTree.left
+        }
+        console.log(`subTree.data ${subTree.data} is the minimum.`)
+        // replace value of the node to be removed with found minimum. Now, right subtree contains a duplicate!
+        deleteThis.data = subTree.data;
+        // apply remove to the right subtree to remove a duplicate.
+        // could I just do subTree = null? since it's a leaf? Tried, it didn't do anything.
+        // this.deleteNode(subTree);
+        console.log(`subTree.data is ${subTree.data}`)
       }
       return 'node deleted.'
     }
@@ -117,7 +134,7 @@ const Tree = class {
         currentNode = currentNode.left;
         this.deleteNode(data, currentNode, parent);
       } else {
-        return 'Data not found.'
+        console.log('Data not found.');
       }
     }
     // If data is larger than current node data
@@ -129,7 +146,7 @@ const Tree = class {
         currentNode = currentNode.right;
         this.deleteNode(data, currentNode, parent);
       } else {
-        return 'Data not found.'
+        console.log('Data not found.');
       }
     }
     return currentNode;
