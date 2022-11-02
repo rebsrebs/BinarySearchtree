@@ -115,14 +115,14 @@ const Tree = class {
           subTree = subTree.left
         }
         console.log(`subTree.data ${subTree.data} is the minimum.`)
-        // replace value of the node to be removed with found minimum. Now, right subtree contains a duplicate!
-        deleteThis.data = subTree.data;
-        // apply remove to the right subtree to remove a duplicate.
-        // could I just do subTree = null? since it's a leaf? Tried, it didn't do anything.
-        // this.deleteNode(subTree);
-        console.log(`subTree.data is ${subTree.data}`)
+        // store data 
+        let temp = subTree.data;
+        // delete node that had that data
+        this.deleteNode(subTree.data);
+        // replace the data to delete with that stored data
+        deleteThis.data = temp;
       }
-      return 'node deleted.'
+      return currentNode;
     }
 
     // If data is smaller than current node data
