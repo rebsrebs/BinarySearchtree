@@ -190,44 +190,44 @@ const Tree = class {
   }
   //END FINDNODE
 
-  //START LEVEL ORDER
-
-
-
-
-
+  //START LEVEL ORDER V1
   levelOrder(callback) {
     let done = [];
-
-    let currentNode = this.root;
-
-    if (currentNode === null) {
+    if (this.root === null) {
       return;
     } else {
       let queue = [];
-      queue.push(currentNode);
-
+      queue.push(this.root);
       while (queue.length > 0) {
-
-        callback(queue[0])
-
+        // enqueue children
         if (queue[0].left) {
           queue.push(queue[0].left);
         }
         if (queue[0].right) {
           queue.push(queue[0].right);
         }
-        
+        // if function was passed, run it
+        if (callback) {
+          callback(queue[0])
+        }
         done.push(queue.shift());      
       }
-      
-      
     }
+    if (callback) {
+      return
+    } else {
     return done;
-
+    }
   }
-
   //END LEVEL ORDER
+
+
+
+
+
+
+
+
 }
 
 const TheTree = new Tree([1,3,5,8,9,20]);
