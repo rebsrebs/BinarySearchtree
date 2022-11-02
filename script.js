@@ -10,6 +10,10 @@ function compareNumbers(a, b) {
   return a - b;
 }
 
+function logNodeData(node) {
+  console.log(node.data);
+}
+
 // TREE CLASS
 const Tree = class {
 
@@ -189,12 +193,10 @@ const Tree = class {
   //START LEVEL ORDER
 
 
-  logNodeData(node) {
-    console.log(node.data);
-  }
 
 
-  levelOrder() {
+
+  levelOrder(callback) {
     let done = [];
 
     let currentNode = this.root;
@@ -207,7 +209,8 @@ const Tree = class {
 
       while (queue.length > 0) {
 
-        this.logNodeData(queue[0]);
+        callback(queue[0])
+
         if (queue[0].left) {
           queue.push(queue[0].left);
         }
