@@ -185,6 +185,46 @@ const Tree = class {
     return currentNode;
   }
   //END FINDNODE
+
+  //START LEVEL ORDER
+
+
+  logNodeData(node) {
+    console.log(node.data);
+  }
+
+
+  levelOrder() {
+    let done = [];
+
+    let currentNode = this.root;
+
+    if (currentNode === null) {
+      return;
+    } else {
+      let queue = [];
+      queue.push(currentNode);
+
+      while (queue.length > 0) {
+
+        this.logNodeData(queue[0]);
+        if (queue[0].left) {
+          queue.push(queue[0].left);
+        }
+        if (queue[0].right) {
+          queue.push(queue[0].right);
+        }
+        
+        done.push(queue.shift());      
+      }
+      
+      
+    }
+    return done;
+
+  }
+
+  //END LEVEL ORDER
 }
 
 const TheTree = new Tree([1,3,5,8,9,20]);
