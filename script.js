@@ -214,21 +214,117 @@ const Tree = class {
       }
     }
     if (callback) {
-      return
+      return;
     } else {
     return done;
     }
   }
   //END LEVEL ORDER
 
+  //START LEVEL ORDER RECURSIVE
+  levelOrderRec(currentNode = this.root, queue = [], done = []) {
+    if (this.root === null) {
+      return 'Tree empty.';
+    } else {
+      // put currentNode passed to function into queue
+      queue.push(currentNode);
+      // if the front of queue has children, send them through again
+      if (queue[0].right) {
+        this.levelOrderRec(queue[0].right);
+      }
+      if (queue[0].left) {
+        this.levelOrderRec(queue[0].left);
+      }
+      done.push(queue.shift());   
+      console.log(done[0]); 
+    }
+  }
+
+  //END LEVEL ORDER RECURSIVE
 
 
+  // HEIGHT - if there is only a root the height is 0
+  // Tree has min and max height
+  // A balanced tree has a diff of max 1 between min and max
+  // min height is distance between root node and first leaf node without two children but it can have one child
+  getMinHeight(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+    let left = this.getMinHeight(node.left);
+    let right = this.getMinHeight(node.right);
+    if (left < right) {
+      return left + 1
+    } else {
+      return right + 1;
+    };
+    }
 
+  getMaxHeight(node = this.root) {
+    if (node === null) {
+      return -1;
+    }
+    let left = this.getMaxHeight(node.left);
+    let right = this.getMaxHeight(node.right);
+    console.log (`Node.data ${node.data} Left ${left} and right ${right}`);
+    // whichever one is bigger, return that one plus 1
+    if (left > right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    };
+  }
 
+    // root, left, right
+    preOrder(currentNode = this.root, array=[]) {
+      if (currentNode != null) {
+        array.push(currentNode.data);
+        this.preOrder(currentNode.left, array);
+        this.preOrder(currentNode.right, array);
+      } else {
+        return;
+      }
+      return array;
+    }
 
+  // left, root, right
+  inOrder(callback, currentNode = this.root, array=[]) {
+    if (currentNode != null) {
+      this.inOrder(callback, currentNode.left, array);
 
+      if (callback) {
+        callback(currentNode);
+      } else {
+        array.push(currentNode.data);
+      }
+      
+      this.inOrder(callback, currentNode.right, array);
+    } else {
+      return;
+    }
+    if (callback) {
+      return;
+    } else {
+    return array;
+    }
+  }
+
+  // left, right, root
+  postOrder(currentNode = this.root, array=[]) {
+    if (currentNode != null) {
+      this.postOrder(currentNode.left, array);
+      this.postOrder(currentNode.right, array);
+      array.push(currentNode.data);
+    } else {
+      return;
+    }
+    return array;
+  }
 
 }
+
+
+
 
 const TheTree = new Tree([1,3,5,8,9,20]);
 
