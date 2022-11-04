@@ -310,15 +310,27 @@ const Tree = class {
   }
 
   // left, right, root
-  postOrder(currentNode = this.root, array=[]) {
+  postOrder(callback, currentNode = this.root, array=[]) {
     if (currentNode != null) {
-      this.postOrder(currentNode.left, array);
-      this.postOrder(currentNode.right, array);
-      array.push(currentNode.data);
+      this.postOrder(callback, currentNode.left, array);
+      this.postOrder(callback, currentNode.right, array);
+
+       if (callback) {
+        callback(currentNode);
+      } else {
+        array.push(currentNode.data);
+      }
+
     } else {
       return;
     }
+    
+    if (callback) {
+      return;
+    } else {
     return array;
+    }
+
   }
 
 }
