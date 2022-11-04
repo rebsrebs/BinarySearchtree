@@ -347,10 +347,33 @@ const Tree = class {
 
   }
 
+
+// getDepth() {
+
+// }
+
+
+isBalanced(){
+  if (!this.root) {
+    return 'There is no tree.'
+  }
+  if (this.getMaxHeight() - this.getMinHeight() <=1) {
+    console.log(this.getMaxHeight() - this.getMinHeight());
+    return true;
+  } else {
+    console.log(this.getMaxHeight() - this.getMinHeight());
+    return false;
+  }
 }
 
 
+// rebalance() {
 
+// }
+
+
+
+}
 
 const TheTree = new Tree([1,3,5,8,9,20]);
 
