@@ -276,15 +276,25 @@ const Tree = class {
   }
 
     // root, left, right
-    preOrder(currentNode = this.root, array=[]) {
+    preOrder(callback, currentNode = this.root, array=[]) {
       if (currentNode != null) {
-        array.push(currentNode.data);
-        this.preOrder(currentNode.left, array);
-        this.preOrder(currentNode.right, array);
+
+        if (callback) {
+          callback(currentNode);
+        } else {
+          array.push(currentNode.data);
+        }
+
+        this.preOrder(callback, currentNode.left, array);
+        this.preOrder(callback, currentNode.right, array);
       } else {
         return;
       }
+      if (callback) {
+        return;
+      } else {
       return array;
+      }
     }
 
   // left, root, right
