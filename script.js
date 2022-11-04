@@ -1,8 +1,8 @@
 
 // NODE FACTORY FUNCTION
 const nodeFactory = (data) => {
-  let left;
-  let right;
+  let left = null;
+  let right = null;
   return { data, left, right };
 };
 
@@ -264,13 +264,17 @@ const Tree = class {
     if (node === null) {
       return -1;
     }
+    console.log(`Node.data ${node.data}`);
+
     let left = this.getMaxHeight(node.left);
     let right = this.getMaxHeight(node.right);
     console.log (`Node.data ${node.data} Left ${left} and right ${right}`);
     // whichever one is bigger, return that one plus 1
     if (left > right) {
+      console.log("Left:");
       return left + 1;
     } else {
+      console.log("Right:");
       return right + 1;
     };
   }
