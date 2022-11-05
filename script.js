@@ -21,8 +21,9 @@ const Tree = class {
     this.array = array;
     this.sortedArray = array.sort(compareNumbers);
     this.root = this.buildTree(this.sortedArray);
-    // this.root = this.buildTree(array);
   }
+
+  
 
 // Methods
   buildTree(sortedArray) {
@@ -197,7 +198,7 @@ const Tree = class {
       return;
     } else {
       let queue = [];
-      queue.push(this.root);
+      queue.push(this.root.data);
       while (queue.length > 0) {
         // enqueue children
         if (queue[0].left) {
@@ -347,31 +348,37 @@ const Tree = class {
 
   }
 
+// getHeight(node) {
 
-// getDepth() {
+//}
 
-// }
-
-
-isBalanced(){
-  if (!this.root) {
-    return 'There is no tree.'
-  }
-  if (this.getMaxHeight() - this.getMinHeight() <=1) {
-    console.log(this.getMaxHeight() - this.getMinHeight());
-    return true;
-  } else {
-    console.log(this.getMaxHeight() - this.getMinHeight());
-    return false;
-  }
-}
-
-
-// rebalance() {
+// getDepth(node) {
 
 // }
 
 
+  isBalanced(){
+    if (!this.root) {
+      return 'There is no tree.'
+    }
+    if (this.getMaxHeight() - this.getMinHeight() <=1) {
+      console.log(this.getMaxHeight() - this.getMinHeight());
+      return true;
+    } else {
+      console.log(this.getMaxHeight() - this.getMinHeight());
+      return false;
+    }
+  }
+
+  reBalance() {
+    if (!this.root) {
+      return 'Tree is empty.'
+    } else {
+      this.array = this.inOrder();
+      this.sortedArray = this.array.sort(compareNumbers);
+      this.root = this.buildTree(this.sortedArray);
+    }
+  }
 
 }
 
