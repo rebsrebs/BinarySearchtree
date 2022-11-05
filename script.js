@@ -198,7 +198,7 @@ const Tree = class {
       return;
     } else {
       let queue = [];
-      queue.push(this.root.data);
+      queue.push(this.root);
       while (queue.length > 0) {
         // enqueue children
         if (queue[0].left) {
@@ -211,7 +211,7 @@ const Tree = class {
         if (callback) {
           callback(queue[0])
         }
-        done.push(queue.shift());      
+        done.push(queue.shift().data);      
       }
     }
     if (callback) {
@@ -370,7 +370,7 @@ const Tree = class {
     }
   }
 
-  reBalance() {
+  rebalance() {
     if (!this.root) {
       return 'Tree is empty.'
     } else {
