@@ -19,7 +19,8 @@ const Tree = class {
 
   constructor(array) {
     this.array = array;
-    this.sortedArray = array.sort(compareNumbers);
+    let uniqueArray = [...new Set(array)];
+    this.sortedArray = uniqueArray.sort(compareNumbers);
     this.root = this.buildTree(this.sortedArray);
   }
 
@@ -394,7 +395,7 @@ const Tree = class {
 
 }
 
-const TheTree = new Tree([1,3,5,8,9,20]);
+const TheTree = new Tree([1,3,3,5,8,9,9,20]);
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   // console.log(`prettyPrint argument node.data is ${node.data}`)
@@ -407,7 +408,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
-// prettyPrint(TheTree.root);
+prettyPrint(TheTree.root);
 
 
 
