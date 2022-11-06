@@ -348,13 +348,27 @@ const Tree = class {
 
   }
 
-// getHeight(node) {
+  // distance between node and a leaf node
+  // getHeight(node) {
+  //   if (!node) {
+  //     return -1;
+  //   }
+  // }
 
-//}
-
-// getDepth(node) {
-
-// }
+  // number of lines from the root
+  getDepth(node, current = this.root, depth = 0) {
+    console.log(`getDepth running, node.data ${node.data} and current.data ${current.data} depth ${depth}`)
+    if (node.data === current.data) {
+      console.log(`we reached the end and depth is ${depth}`)
+      return depth;
+    }
+    depth++;
+    if (node.data < current.data) {
+      return this.getDepth(node, current.left, depth);
+    } else {
+      return this.getDepth(node, current.right, depth)
+    }
+  }
 
 
   isBalanced(){
