@@ -261,21 +261,22 @@ const Tree = class {
     };
     }
 
+  // This works to find the height of any node
   getMaxHeight(node = this.root) {
     if (node === null) {
       return -1;
     }
-    console.log(`Node.data ${node.data}`);
+    // console.log(`Node.data ${node.data}`);
 
     let left = this.getMaxHeight(node.left);
     let right = this.getMaxHeight(node.right);
-    console.log (`Node.data ${node.data} Left ${left} and right ${right}`);
+    // console.log (`Node.data ${node.data} Left ${left} and right ${right}`);
     // whichever one is bigger, return that one plus 1
     if (left > right) {
-      console.log("Left:");
+      // console.log("Left:");
       return left + 1;
     } else {
-      console.log("Right:");
+      // console.log("Right:");
       return right + 1;
     };
   }
@@ -348,12 +349,6 @@ const Tree = class {
 
   }
 
-  // distance between node and a leaf node
-  // getHeight(node) {
-  //   if (!node) {
-  //     return -1;
-  //   }
-  // }
 
   // number of lines from the root
   getDepth(node, current = this.root, depth = 0) {
@@ -372,14 +367,17 @@ const Tree = class {
 
 
   isBalanced(){
+    console.log('Checking if tree is balanced.')
     if (!this.root) {
       return 'There is no tree.'
     }
     if (this.getMaxHeight() - this.getMinHeight() <=1) {
-      console.log(this.getMaxHeight() - this.getMinHeight());
+      // console.log(this.getMaxHeight() - this.getMinHeight());
+      console.log('The tree is balanced.')
       return true;
     } else {
-      console.log(this.getMaxHeight() - this.getMinHeight());
+      // console.log(this.getMaxHeight() - this.getMinHeight());
+      console.log('The tree is unbalanced.')
       return false;
     }
   }
@@ -409,4 +407,49 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
-prettyPrint(TheTree.root);
+// prettyPrint(TheTree.root);
+
+
+
+
+
+const driver = function(array) {
+  const TheTree = new Tree(array);
+  prettyPrint(TheTree.root);
+  TheTree.isBalanced();
+  console.log(`levelOrder: ${TheTree.levelOrder()}`);
+  console.log(`preOrder: ${TheTree.preOrder()}`);
+  console.log(`postOrder: ${TheTree.postOrder()}`);
+  console.log(`inOrder: ${TheTree.inOrder()}`);
+  TheTree.insertNode(101);
+  TheTree.insertNode(150);
+  TheTree.insertNode(105);
+  prettyPrint(TheTree.root);
+  TheTree.isBalanced();
+  TheTree.rebalance();
+  prettyPrint(TheTree.root);
+  console.log(`levelOrder: ${TheTree.levelOrder()}`);
+  console.log(`preOrder: ${TheTree.preOrder()}`);
+  console.log(`postOrder: ${TheTree.postOrder()}`);
+  console.log(`inOrder: ${TheTree.inOrder()}`);
+  TheTree.isBalanced();
+}
+
+// Tie it all together
+// Write a simple driver script that does the following:
+
+// 1. Create a binary search tree from an array of random numbers. You can create a function if you want that returns an array of random numbers each time you call it.
+
+// 2. Confirm that the tree is balanced by calling isBalanced
+
+// 3. Print out all elements in level, pre, post, and in order
+
+// 4. Unbalance the tree by adding several numbers > 100
+
+// 5. Confirm that the tree is unbalanced by calling isBalanced
+
+// 6. Balance the tree by calling rebalance
+
+// 7. Confirm that the tree is balanced by calling isBalanced
+
+// 8. Print out all elements in level, pre, post, and in order
